@@ -13,6 +13,7 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.getItems()
+    this.getItems2()
   }
 
   async getItems(){
@@ -22,6 +23,16 @@ export class IndexComponent implements OnInit {
         this.cards = cards
         this.cards_loaded = true
       })
+  }
+
+  async getItems2(){
+    this.session.getItems2()
+      .then((data:any) => {
+        console.log(JSON.stringify(data));
+      })
+      .catch((error:any) => {
+        console.log("Promise(http) rejected with " + JSON.stringify(error));
+      });
   }
 
 }
