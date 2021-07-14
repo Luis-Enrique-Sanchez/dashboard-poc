@@ -7,25 +7,23 @@ import { SessionService } from '../services/session.service';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  ruta = 'assets/img/pagos.png';
-  customer = 'Padma';
-  cards =
+  cards = 
   [
     {
       ruta: "assets/img/pagos.png",
-      titulo: "Pagos"
+      titulo: "PAGOS"
     },
     {
      ruta: "assets/img/Autorizaciones.png",
-     titulo: "Autorizaciones"
+     titulo: "AUTORIZACIONES"
     },
     {
      ruta: "assets/img/cuentas.png",
-     titulo: "Cuentas"
+     titulo: "CUENTAS"
    },
    {
      ruta: "assets/img/transferencias.png",
-     titulo: "Transferencias"
+     titulo: "TRANSFERENCIAS"
    }     
   ]
   constructor(private session: SessionService) { }
