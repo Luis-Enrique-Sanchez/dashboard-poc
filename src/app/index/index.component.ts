@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-index',
@@ -27,9 +28,10 @@ export class IndexComponent implements OnInit {
      titulo: "Transferencias"
    }     
   ]
-  constructor() { }
+  constructor(private session: SessionService) { }
 
   ngOnInit(): void {
+    console.log(this.session.login())
   }
 
 }
