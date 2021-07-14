@@ -1,8 +1,23 @@
 
-<div class="container-fluid" style="background-color: #056DAE">
-    <div class="row"> 
-        <div class="col-md-6 d-flex justify-content-center mt-5" *ngFor="let card of this.cards">
-            <app-card [ruta]="card.ruta" [titulo]="card.titulo"></app-card>
+<!-- Cards cargadas -->
+<section>
+    <div class="container-fluid" style="background-color: #056DAE" *ngIf="this.cards_loaded;else cardsNotLoaded">
+        <div class="row"> 
+            <div class="col-md-6 d-flex justify-content-center mt-5" *ngFor="let card of this.cards">
+                <app-card [ruta]="card.ruta" [titulo]="card.titulo"></app-card>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Cards aun NO cargadas -->
+<section>
+    <ng-template #cardsNotLoaded>
+        <div class="container-fluid" style="background-color: white">
+            <div class="d-flex justify-content-center mt-5 pt-5">
+                <div class="spinner-border text-primary" style="width: 15rem; height: 15rem;" role="status">
+                </div>    
+            </div>
+        </div>
+    </ng-template>
+</section>

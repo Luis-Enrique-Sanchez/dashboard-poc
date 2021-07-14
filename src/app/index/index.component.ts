@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-index',
@@ -6,28 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  cards = 
-  [
-    {
-      ruta: "assets/img/pagos.png",
-      titulo: "PAGOS"
-    },
-    {
-     ruta: "assets/img/Autorizaciones.png",
-     titulo: "AUTORIZACIONES"
-    },
-    {
-     ruta: "assets/img/cuentas.png",
-     titulo: "CUENTAS"
-   },
-   {
-     ruta: "assets/img/transferencias.png",
-     titulo: "TRANSFERENCIAS"
-   }     
-  ]
-  constructor() { }
+  cards:any = []
+  cards_loaded = false
+  constructor(private session: SessionService) { }
 
   ngOnInit(): void {
+    this.getItems()
+  }
+
+  async getItems(){
+    this.session.getItems()
+      .then((cards: any) => 
+      {
+        this.cards = cards
+        this.cards_loaded = true
+      })
   }
 
 }
