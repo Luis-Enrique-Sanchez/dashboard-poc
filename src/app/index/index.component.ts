@@ -7,29 +7,21 @@ import { SessionService } from '../services/session.service';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  cards = 
-  [
-    {
-      ruta: "assets/img/pagos.png",
-      titulo: "PAGOS"
-    },
-    {
-     ruta: "assets/img/Autorizaciones.png",
-     titulo: "AUTORIZACIONES"
-    },
-    {
-     ruta: "assets/img/cuentas.png",
-     titulo: "CUENTAS"
-   },
-   {
-     ruta: "assets/img/transferencias.png",
-     titulo: "TRANSFERENCIAS"
-   }     
-  ]
+  cards:any = []
+  cards_loaded = false
   constructor(private session: SessionService) { }
 
   ngOnInit(): void {
-    console.log(this.session.login())
+    this.getItems()
+  }
+
+  async getItems(){
+    this.session.getItems()
+      .then((cards: any) => 
+      {
+        this.cards = cards
+        this.cards_loaded = true
+      })
   }
 
 }

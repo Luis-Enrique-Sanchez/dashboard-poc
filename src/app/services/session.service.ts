@@ -5,9 +5,31 @@ import { Injectable } from '@angular/core';
 })
 export class SessionService {
 
+  mock_cards = 
+  [
+    {
+      ruta: "assets/img/pagos.png",
+      titulo: "PAGOS"
+    },
+    {
+     ruta: "assets/img/Autorizaciones.png",
+     titulo: "AUTORIZACIONES"
+    },
+    {
+     ruta: "assets/img/cuentas.png",
+     titulo: "CUENTAS"
+   },
+   {
+     ruta: "assets/img/transferencias.png",
+     titulo: "TRANSFERENCIAS"
+   },     
+  ]
+
   constructor() { }
 
-  login() {
-    return "Login: Hello World"
+  getItems():any{
+    return new Promise((resolve,reject) => {
+      setTimeout(() => resolve(this.mock_cards), 2000);
+    });
   }
 }
