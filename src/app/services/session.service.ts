@@ -41,6 +41,8 @@ export class SessionService {
   getItems():any{
    let rute = this.api_rute + "/api/getItems"
    let headers:HttpHeaders = this.appendAuthHeaders(new HttpHeaders())
+
+
    console.log(headers)
    return this.http.get(rute,{headers:headers}).toPromise()
   }
