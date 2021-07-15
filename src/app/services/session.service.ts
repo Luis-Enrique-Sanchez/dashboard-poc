@@ -32,21 +32,23 @@ export class SessionService {
 
   constructor(private http: HttpClient) { }
 
-  getItems():any{
+  getItems_mock():any{
     return new Promise((resolve,reject) => {
       setTimeout(() => resolve(this.mock_cards), 2000);
     });
   }
 
-  getItems2():any{
+  getItems():any{
    let rute = this.api_rute + "/api/getItems"
    let headers:HttpHeaders = this.appendAuthHeaders(new HttpHeaders())
+   console.log(headers)
    return this.http.get(rute,{headers:headers}).toPromise()
   }
 
   appendAuthHeaders(headers: HttpHeaders): HttpHeaders{
     headers = headers.append('Authorization', "Basic "+btoa(this.user+':'+this.password))
-    headers = headers.append('Content-Type','application/json')
+    headers = headers.append("Accept","*/*")
+    headers = headers.append("Content-Type","application/json")
     return headers
   }
 }

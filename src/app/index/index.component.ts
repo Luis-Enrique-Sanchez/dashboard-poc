@@ -17,7 +17,7 @@ export class IndexComponent implements OnInit {
   }
 
   async getItems(){
-    this.session.getItems()
+    this.session.getItems_mock()
       .then((cards: any) => 
       {
         this.cards = cards
@@ -26,12 +26,12 @@ export class IndexComponent implements OnInit {
   }
 
   async getItems2(){
-    this.session.getItems2()
+    this.session.getItems()
       .then((data:any) => {
         console.log(JSON.stringify(data));
       })
       .catch((error:any) => {
-        console.log("Promise(http) rejected with " + JSON.stringify(error));
+        console.log("Promise(http) rejected with \n" + JSON.stringify(error));
       });
   }
 
