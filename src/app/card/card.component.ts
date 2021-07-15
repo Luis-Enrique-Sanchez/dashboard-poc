@@ -9,6 +9,7 @@ export class CardComponent implements OnInit {
 
   @Input() ruta: string="";
   @Input() titulo: string="";
+  shadow_class: string=""
 
   constructor() { 
  
