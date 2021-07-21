@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DashNavbar1Component implements OnInit {
 
   @Input() moral_user: string="";
+  @Input() cuenta: string="";
   constructor() { }
 
   ngOnInit(): void {
