@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'dashboard-poc';
   usuario = 'PERSONAL MORAL SOCIEDAD CAPITAL';
+  cuenta = '09626828';
 }
