@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  user: string = "user"
-  password: string = "user"
-  api_rute = "http://localhost:8081"  
+  user: string = "user";
+  password: string = "user";
+  api_url = environment.api_url;  
 
   mock_cards = 
   [
@@ -39,7 +40,7 @@ export class SessionService {
   }
 
   getItems():any{
-   let rute = this.api_rute + "/api/getItems"
+   let rute = this.api_url + "/api/getItems"
    let headers:HttpHeaders = this.appendAuthHeaders(new HttpHeaders())
 
 
