@@ -36,9 +36,7 @@ export class SessionService {
   constructor(private http: HttpClient) { }
 
   getItems_mock():any{
-    return new Promise((resolve,reject) => {
-      setTimeout(() => resolve(this.mock_cards), 2000);
-    });
+    return this.http.get('/assets/mock/cards.json').toPromise()
   }
 
   getItems():any{
@@ -55,7 +53,7 @@ export class SessionService {
   }
 
   async login(){
-    let route = "localhost:7777/portalserver/services/rest/api/v1/public/channels/bne/legacy/authenticate/login"
+    let route = "http://localhost:7777/portalserver/services/rest/api/v1/public/channels/bne/legacy/authenticate/login"
     let body = {
       "sessionRequired": true,
       "customerCredentials": {
@@ -72,6 +70,7 @@ export class SessionService {
     let headers = new HttpHeaders()
     headers = headers.append("Accept","*/*")
     headers = headers.append("Content-Type","application/json")
+    headers = headers.append("Access-Control-Allow-Origin","*")
     return this.http.post(route,body,{headers:headers}).toPromise()
   }
 

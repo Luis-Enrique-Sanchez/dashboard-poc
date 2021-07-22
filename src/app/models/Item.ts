@@ -1,4 +1,4 @@
-export class card{
+export class Item{
     constructor(
         public titulo: string,
         public id: string,
