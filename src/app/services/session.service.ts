@@ -8,7 +8,7 @@ export class SessionService {
 
   user: string = "user"
   password: string = "user"
-  api_rute = "http://localhost:8081"  
+  api_rute = "http://localhost:7777/portalserver/services/rest/api/v1/private/get/items"  
 
   mock_cards = 
   [
