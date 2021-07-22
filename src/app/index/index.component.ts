@@ -12,7 +12,8 @@ export class IndexComponent implements OnInit {
   constructor(private session: SessionService) { }
 
   ngOnInit(): void {
-    this.getItems()
+    this.login();
+    this.getItems();
     this.getItems2()
   }
 
@@ -32,6 +33,17 @@ export class IndexComponent implements OnInit {
       })
       .catch((error:any) => {
         console.log("Promise(http) rejected with \n" + JSON.stringify(error));
+      });
+  }
+
+  async login(){
+    this.session.login()
+      .then((data:any) =>
+      {
+        console.log(data)
+      })
+      .catch((error:any) => {
+        console.log("Promise(http) login rejected with \n" + JSON.stringify(error));
       });
   }
 
