@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { Item } from '../models/Item';
+import { HostListener } from '@angular/core';
 
 
 @Component({
@@ -14,7 +15,6 @@ export class IndexComponent implements OnInit {
   constructor(private session: SessionService) { }
 
   ngOnInit(): void {
-    this.login();
     this.getItems();
   }
 
@@ -30,16 +30,28 @@ export class IndexComponent implements OnInit {
       });
   }
 
-  async login(){
-    this.session.login()
-      .then((data:any) =>
+  async getItems2(){
+    this.session.getItems()
+      .then((cards: any) => 
       {
-        console.log("Login success")
-        console.log(data)
+        this.cards = cards["cards"]
+        this.cards_loaded = true
       })
       .catch((error:any) => {
-        console.log("Promise(http) login rejected with \n" + JSON.stringify(error));
+        console.log("Promise(http) rejected with \n" + JSON.stringify(error));
       });
+  }
+
+  setSessionCookie(session_id:string){
+    this.session.setCookie("JSESSIONID",session_id);
+  }
+
+  @HostListener('window:message', ['$event']) onPostMessage(event:any) {
+    if(event.data["JSESSIONID"]){
+      let cookie = event.data["JSESSIONID"];
+      this.session.session_id = cookie;
+      this.getItems2();
+    }
   }
 
 }
