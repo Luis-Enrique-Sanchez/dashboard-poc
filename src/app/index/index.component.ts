@@ -15,7 +15,8 @@ export class IndexComponent implements OnInit {
   constructor(private session: SessionService) { }
 
   ngOnInit(): void {
-    this.getItems();
+    //this.getItems();
+    
   }
 
   async getItems(){
@@ -48,6 +49,7 @@ export class IndexComponent implements OnInit {
 
   @HostListener('window:message', ['$event']) onPostMessage(event:any) {
     if(event.data["JSESSIONID"]){
+      console.log("Host listener id")
       let cookie = event.data["JSESSIONID"];
       this.session.session_id = cookie;
       this.getItems2();
