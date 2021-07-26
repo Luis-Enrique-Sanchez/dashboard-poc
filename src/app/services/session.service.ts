@@ -14,8 +14,10 @@ export class SessionService {
   path_cookie = "http://localhost:7777"
 
 
-  setCookie(key:string,value:string){
-    document.cookie=`${key}=${value};SameSite=None;`
+  setSessionCookie(key:string,value:string){
+    let setString=`${key}=${value}`
+    document.cookie=setString
+    console.log(setString)
   }
 
   mock_cards = 
@@ -48,10 +50,8 @@ export class SessionService {
   getItems():any{
    let rute = this.api_url + "/portalserver/services/rest/api/v1/private/get/items"
    let headers:HttpHeaders = this.appendAuthHeaders(new HttpHeaders())
-   this.setCookie("JSESSIONID",this.session_id);
-   console.log("Realizar llamada http con cookies:")
-   console.log(document.cookie)
-   return this.http.get(rute,{headers:headers/*,withCredentials:true*/}).toPromise()
+   this.setSessionCookie("JSESSIONID",this.session_id);
+   return this.http.get(rute,{headers:headers,withCredentials:true}).toPromise()
   }
 
   appendAuthHeaders(headers: HttpHeaders): HttpHeaders{
