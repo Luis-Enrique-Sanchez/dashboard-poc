@@ -9,7 +9,16 @@ export class SessionService {
 
   user: string = "user";
   password: string = "user";
-  api_url = environment.api_url;  
+  api_url = environment.api_url;
+  session_id = ""
+  path_cookie = "http://localhost:7777"
+
+
+  setSessionCookie(key:string,value:string){
+    let setString=`${key}=${value}`
+    document.cookie=setString
+    console.log(setString)
+  }
 
   mock_cards = 
   [
@@ -32,48 +41,40 @@ export class SessionService {
   ]
 
 
-
   constructor(private http: HttpClient) { }
 
   getItems_mock():any{
-    return new Promise((resolve,reject) => {
-      setTimeout(() => resolve(this.mock_cards), 2000);
-    });
+    return this.http.get('/assets/mock/cards.json').toPromise()
   }
 
   getItems():any{
    let rute = this.api_url + "/portalserver/services/rest/api/v1/private/get/items"
-   //let headers:HttpHeaders = this.appendAuthHeaders(new HttpHeaders())
-   return this.http.get(rute).toPromise()
+   let headers:HttpHeaders = this.appendAuthHeaders(new HttpHeaders())
+   this.setSessionCookie("JSESSIONID",this.session_id);
+   return this.http.get(rute,{headers:headers,withCredentials:true}).toPromise()
   }
 
   appendAuthHeaders(headers: HttpHeaders): HttpHeaders{
-    headers = headers.append('Authorization', "Basic "+btoa(this.user+':'+this.password))
     headers = headers.append("Accept","*/*")
-    headers = headers.append("Content-Type","application/json")
+    //headers = headers.append("Content-Type","application/json")
     return headers
   }
 
-  async login(){
-    let route = "localhost:7777/portalserver/services/rest/api/v1/public/channels/bne/legacy/authenticate/login"
-    let body = {
-      "sessionRequired": true,
-      "customerCredentials": {
-        "customerId": "1974440",
-        "legalRepresentativeId": "21",
-        "password": "21A1B2C3",
-        "encryptionType": "",
-        "language": "es",
-        "clientIp": "1.1.1.1",
-        "data": ""
-      }
+  private getCookie(name: string) {
+    //console.log("COOKIES");
+    //console.log(document.cookie);
+    let ca: Array<string> = document.cookie.split(';');
+    let caLen: number = ca.length;
+    let cookieName = `${name}=`;
+    let c: string;
+
+    for (let i: number = 0; i < caLen; i += 1) {
+        c = ca[i].replace(/^\s+/g, '');
+        if (c.indexOf(cookieName) == 0) {
+            return c.substring(cookieName.length, c.length);
+        }
     }
-
-    let headers = new HttpHeaders()
-    headers = headers.append("Accept","*/*")
-    headers = headers.append("Content-Type","application/json")
-    return this.http.post(route,body,{headers:headers}).toPromise()
+    return '';
   }
-
 
 }

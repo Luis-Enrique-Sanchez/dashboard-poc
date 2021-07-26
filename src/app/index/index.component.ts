@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../services/session.service';
+import { Item } from '../models/Item';
+import { HostListener } from '@angular/core';
+
 
 @Component({
   selector: 'app-index',
@@ -7,44 +10,37 @@ import { SessionService } from '../services/session.service';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  cards:any = []
+  cards:Item[] = []
   cards_loaded = false
+  cards_failed = false
   constructor(private session: SessionService) { }
 
   ngOnInit(): void {
-    this.login();
     this.getItems();
-    this.getItems2()
   }
+
 
   async getItems(){
-    this.session.getItems_mock()
-      .then((cards: any) => 
-      {
-        this.cards = cards
-        this.cards_loaded = true
-      })
+    if(!this.cards_loaded){
+      this.session.getItems()
+        .then((cards: any) => 
+          {
+            this.cards = cards["cards"];
+            this.cards_loaded = true;
+          })
+        .catch((error:any) =>
+          {
+            console.log("Promise(http) rejected with \n" + JSON.stringify(error));
+            this.cards_failed = true;
+          });
+    }
   }
 
-  async getItems2(){
-    this.session.getItems()
-      .then((data:any) => {
-        console.log(JSON.stringify(data));
-      })
-      .catch((error:any) => {
-        console.log("Promise(http) rejected with \n" + JSON.stringify(error));
-      });
-  }
-
-  async login(){
-    this.session.login()
-      .then((data:any) =>
-      {
-        console.log(data)
-      })
-      .catch((error:any) => {
-        console.log("Promise(http) login rejected with \n" + JSON.stringify(error));
-      });
+  @HostListener('window:message', ['$event']) onPostMessage(event:any) {
+    if(event.data["JSESSIONID"]){
+      this.session.session_id = event.data["JSESSIONID"];
+      this.getItems();
+    }
   }
 
 }
