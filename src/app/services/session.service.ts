@@ -12,6 +12,7 @@ export class SessionService {
   api_url = environment.api_url;
   session_id = ""
   path_cookie = "http://localhost:7777"
+  logOutApiUri = "localhost:7777/portalserver/services/rest/api/v1" + "/private/channels/bne/legacy/authenticate/login"
 
 
   setSessionCookie(key:string,value:string){
@@ -50,7 +51,7 @@ export class SessionService {
   getItems():any{
    let rute = this.api_url + "/portalserver/services/rest/api/v1/private/get/items"
    let headers:HttpHeaders = this.appendAuthHeaders(new HttpHeaders())
-   this.setSessionCookie("JSESSIONID",this.session_id);
+   //this.setSessionCookie("JSESSIONID",this.session_id);
    return this.http.get(rute,{headers:headers,withCredentials:true}).toPromise()
   }
 
@@ -58,6 +59,10 @@ export class SessionService {
     headers = headers.append("Accept","*/*")
     //headers = headers.append("Content-Type","application/json")
     return headers
+  }
+
+  public logOut(){
+    return this.http.get(this.logOutApiUri).toPromise()
   }
 
   private getCookie(name: string) {

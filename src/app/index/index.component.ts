@@ -27,6 +27,7 @@ export class IndexComponent implements OnInit {
           {
             this.cards = cards["cards"];
             this.cards_loaded = true;
+            this.cards_failed = false;
           })
         .catch((error:any) =>
           {
