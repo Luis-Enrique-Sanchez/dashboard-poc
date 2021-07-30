@@ -17,6 +17,7 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.getItems();
+    console.log(this.cards);
   }
 
 

@@ -4,7 +4,7 @@
     <div class="container-fluid" style="background-color: #056DAE" *ngIf="this.cards_loaded && !this.cards_failed">
         <div class="row"> 
             <div class="col-md-6 d-flex justify-content-center mt-5" *ngFor="let card of this.cards">
-                <app-card [ruta]="'assets/img/pagos.png'" [titulo]="card.titulo"></app-card>
+                <app-card [title]="card.titulo" [amount]="card.amount" [description]="card.descripcion"></app-card>
             </div>
         </div>
     </div>

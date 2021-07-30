@@ -7,10 +7,18 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  @Input() ruta: string="";
-  @Input() titulo: string="";
+ 
+  @Input() title: string="";
+  @Input() description: string="";
+  @Input() amount: string="";
   shadow_class: string=""
-
+  
+  dict: any = {
+    "Pago": "paid",
+    "Transferencia": "transfer_within_a_station",
+    "Cuenta": "account_circle",
+    "Autorizacion": "vpn_key"
+  }
   constructor() { 
  
   }
@@ -19,3 +27,6 @@ export class CardComponent implements OnInit {
   }
 
 }
+
+
+
