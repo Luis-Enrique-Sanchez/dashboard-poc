@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { FormsModule } from '@angular/forms'
 import { DashNavbar1Component } from './dash-navbar1/dash-navbar1.component';
-import { LayoutComponent } from './layout/layout.component';
 import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     IndexComponent,
     DashNavbar1Component,
-    LayoutComponent,
     CardComponent,
   ],
   imports: [
