@@ -1,8 +1,0 @@
-.card:hover{
-    cursor: pointer;
-}
-
-.card:hover .card-header{
-    text-decoration: underline;
-}
-
