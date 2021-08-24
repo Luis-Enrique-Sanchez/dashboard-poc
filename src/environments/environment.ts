@@ -4,9 +4,11 @@
 
 export const environment = {
   production: false,
-  api_url:"http://localhost:7777",
-  getItemsPath:"/portalserver/services/rest/api/v1/private/get/items",
-  backbase_url:"http://localhost:7777",
+  //api_url:"http://localhost:7777",
+  api_url:"http://ec2-3-81-147-145.compute-1.amazonaws.com:7777",
+  //getItemsPath:"/portalserver/services/rest/api/v1/private/get/items",
+  getItemsPath:"/portalserver/services/rest/api/v1/private/get/items/2",
+  backbase_url:"http://ec2-3-81-147-145.compute-1.amazonaws.com:7777",
   logOut_url:"/portalserver/test-dashboard/index"
 };
 
