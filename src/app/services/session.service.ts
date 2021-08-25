@@ -12,7 +12,7 @@ export class SessionService {
   api_url = environment.api_url;
   session_id = ""
   path_cookie = "http://localhost:7777"
-  logOutApiUri = "localhost:7777/portalserver/services/rest/api/v1" + "/private/channels/bne/legacy/authenticate/login"
+  logOutApiUri: string = environment.backbase_url + environment.logOut_url;
 
 
   setSessionCookie(key:string,value:string){
@@ -62,7 +62,8 @@ export class SessionService {
   }
 
   public logOut(){
-    return this.http.get(this.logOutApiUri).toPromise()
+      window.parent.postMessage({"logOut":true}, '*');
+      console.log("Message posted to parent")
   }
 
   private getCookie(name: string) {

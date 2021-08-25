@@ -19,14 +19,6 @@ export class DashNavbar1Component implements OnInit {
 
   clickLogOut(){
     this.session.logOut()
-      .then((response) =>{
-        console.log("LogOut Success")
-        console.log(response)
-      })
-      .catch((error)=>{
-        console.log("LogOur Error")
-        console.log(error)
-      })
   }
 
 }
